@@ -64,7 +64,16 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
-      }
+      },
+      {
+        test:/\.less$/i,   //使用正则表达式匹配less
+        use:[
+          "style-loader",
+          "css-loader", 
+          "less-loader"  //这个是导入顺序的第一个
+        ]
+      },
+
     ]
   },
   node: {
