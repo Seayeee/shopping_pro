@@ -68,7 +68,7 @@ export default {
           })
         }
         this.$message.success('登录成功！')
-        //将登录成功后的token保存在客户端的sessionStorage中（会话中保存，localStorage是用九年保存）
+        //将登录成功后的token保存在客户端的sessionStorage中（会话中保存，localStorage是永久保存）
         //项目中的其他接口，只有 在登录之后才能访问
         //token只应在当前网站打开期间生效，故保存于sessionStorage中
         window.sessionStorage.setItem('token', res.data.token)

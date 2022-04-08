@@ -2,24 +2,45 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import login from '../components/login'
 import home from '../components/home'
+import users from '../components/user'
+import cate from '../components/goods/cate'
 
+import welcome from '../components/welcome'
 Vue.use(Router)
 
 const router = new Router({
   routes: [
     {
       //重定向
-      path:'/',
-      redirect:'/login'
+      path: '/',
+      redirect: '/login'
     },
     {
       path: '/login',
-      component:login
-      
+      component: login
+
     },
     {
-        path:'/home',
-        component:home
+      path: '/home',
+      component: home,
+      redirect: '/welcome',
+      children: [
+
+        {
+          path: '/welcome',
+          component: welcome
+
+        },
+        {
+          path: '/users',
+          component: users,
+
+        },
+        {
+          path:'/categories',
+          component:cate,
+        }
+      ]
     }
   ]
 })
@@ -30,10 +51,10 @@ const router = new Router({
 //next 是函数，表示放行
 //如果to登录页，直接next放行
 //否则，判断是否有token，如果有则放行，没有则路由定向到/login
-router.beforeEach((to,from,next)=>{
-  if(to.path === '/login') return next();
+router.beforeEach((to, from, next) => {
+  if (to.path === '/login') return next();
   const tokenstr = window.sessionStorage.getItem('token');
-  if(!tokenstr) return next('/login');
+  if (!tokenstr) return next('/login');
   next();
 }
 )
